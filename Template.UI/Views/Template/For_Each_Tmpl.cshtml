@@ -1,0 +1,11 @@
+﻿@using Incoding.MvcContrib
+@using Template.UI.Models
+@using (var template = Html.Incoding().Template<CountryVm>())
+{
+    <ul>
+        @using (var each = template.ForEach())
+        {
+            <li>@each.For(r => r.Title) / @each.For(r => r.Code)</li>
+        }
+    </ul>
+}

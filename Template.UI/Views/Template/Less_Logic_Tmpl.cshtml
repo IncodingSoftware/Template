@@ -1,0 +1,21 @@
+﻿@using Incoding.MvcContrib
+@using Template.UI.Models
+@using (var template = Html.Incoding().Template<UnaryVm>())
+{
+    <ul>
+        @using (var each = template.ForEach())
+        {
+            <li class="@each.Inline(r => r.Is, isTrue: "true-class", isFalse: "false-class")">
+                @using (each.Is(r => r.Is))
+                {
+                    <span>Value true</span>
+                }
+                
+                @using (each.Not(r => r.Is))
+                {
+                    <span>Value false</span>
+                }
+            </li>
+        }
+    </ul>
+}

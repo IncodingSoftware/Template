@@ -1,0 +1,17 @@
+@using Incoding.MvcContrib
+@using Template.UI.Models
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    var tmplId = Guid.NewGuid().ToString();
+    using (var template = Html.Incoding().ScriptTemplate<CountryVm>(tmplId))
+    {
+        using (var each = template.ForEach())
+        {
+            
+        }
+    }
+}
+

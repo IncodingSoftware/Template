@@ -1,0 +1,13 @@
+﻿@using Incoding.MvcContrib
+@using Template.UI.Models
+@using (var template = Html.Incoding().Template<CountryVm>())
+{
+    <ul>
+        @using (var each = template.NotEach())
+        {
+            <li>
+                No data
+            </li>
+        }
+    </ul>
+}

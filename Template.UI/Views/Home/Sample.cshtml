@@ -1,0 +1,78 @@
+@using Incoding.MvcContrib
+@using Template.UI.Models
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .true-class { color: red; }
+
+    .false-class { color: green; }
+</style>
+@{
+    string tmplId = Guid.NewGuid().ToString();
+    using (var template = Html.Incoding().ScriptTemplate<CountryVm>(tmplId))
+    {
+        <ul>
+            @using (var each = template.ForEach())
+            {
+                <li>@each.For(r => r.Title) / @each.For(r => r.Code)</li>
+            }
+        </ul>
+    }
+
+}
+
+<div>
+    <h3>By jquery selector</h3>
+    @(Html.When(JqueryBind.InitIncoding)
+          .Do()
+          .AjaxGet(Url.Action("FetchCountries", "Data"))
+          .OnSuccess(dsl => dsl.Self().Core().Insert.WithTemplateById(tmplId).Html())
+          .AsHtmlAttributes()
+          .ToDiv())
+</div>
+<div>
+    <h3>By ajax</h3>
+    @(Html.When(JqueryBind.InitIncoding)
+          .Do()
+          .AjaxGet(Url.Action("FetchCountries", "Data"))
+          .OnSuccess(dsl => dsl.Self().Core().Insert.WithTemplateByUrl(Url.Dispatcher().AsView("~/Views/Template/For_Each_Tmpl.cshtml")).Html())
+          .AsHtmlAttributes()
+          .ToDiv())
+</div>
+<div>
+    <h3>For each on one item</h3>
+    @(Html.When(JqueryBind.InitIncoding)
+          .Do()
+          .AjaxGet(Url.Action("FetchCountry", "Data"))
+          .OnSuccess(dsl => dsl.Self().Core().Insert.WithTemplateByUrl(Url.Dispatcher().AsView("~/Views/Template/For_Each_Tmpl.cshtml")).Html())
+          .AsHtmlAttributes()
+          .ToDiv())
+</div>
+<div>
+    <h3>For not each</h3>
+    @(Html.When(JqueryBind.InitIncoding)
+          .Do()
+          .AjaxGet(Url.Action("FetchEmpty", "Data"))
+          .OnSuccess(dsl => dsl.Self().Core().Insert.WithTemplateByUrl(Url.Dispatcher().AsView("~/Views/Template/For_Not_EachTmpl.cshtml")).Html())
+          .AsHtmlAttributes()
+          .ToDiv())
+</div>
+<div>
+    <h3>Inner each</h3>
+    @(Html.When(JqueryBind.InitIncoding)
+          .Do()
+          .AjaxGet(Url.Action("FetchCountries", "Data"))
+          .OnSuccess(dsl => dsl.Self().Core().Insert.WithTemplateByUrl(Url.Dispatcher().AsView("~/Views/Template/For_Inner_Each_Tmpl.cshtml")).Html())
+          .AsHtmlAttributes()
+          .ToDiv())
+</div>
+<div>
+    <h3>Less logic</h3>
+    @(Html.When(JqueryBind.InitIncoding)
+          .Do()
+          .AjaxGet(Url.Action("FetchUnary", "Data"))
+          .OnSuccess(dsl => dsl.Self().Core().Insert.WithTemplateByUrl(Url.Dispatcher().AsView("~/Views/Template/Less_Logic_Tmpl.cshtml")).Html())
+          .AsHtmlAttributes()
+          .ToDiv())
+</div>
