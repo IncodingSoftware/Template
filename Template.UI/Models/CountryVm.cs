@@ -13,9 +13,9 @@
         public string Code { get; set; }
 
         public string Title { get; set; }
-        
+
         public List<CityVm> Cities { get; set; }
-        
+
         #endregion
     }
 }

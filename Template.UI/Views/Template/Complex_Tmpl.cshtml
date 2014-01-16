@@ -1,0 +1,26 @@
+﻿@using Incoding.MvcContrib
+@using Template.UI.Models
+@using (var template = Html.Incoding().Template<ComplexVm>())
+{
+    using (var each = template.ForEach())
+    {
+        <div>                
+            <ul>
+                @using (var countryEach = each.ForEach(r => r.Country))
+                {
+                    <li>
+                        Country @countryEach.For(r => r.Title) from parent @each.Up().For(r => r.Grpoup)
+                        <dl>
+                            @using (var cityEach = countryEach.ForEach(r => r.Cities))
+                            {
+                                <dd>
+                                    City: @cityEach.For(r => r.Name)
+                                </dd>
+                            }
+                        </dl>
+                    </li>
+                }              
+            </ul>
+        </div>
+    }
+}

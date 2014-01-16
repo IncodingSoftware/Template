@@ -16,16 +16,14 @@
         #region Http action
 
         [HttpGet]
-        public ActionResult FetchUnary()
+        public ActionResult FetchComplex()
         {
-            return IncJson(new List<UnaryVm>
+            return IncJson(new ComplexVm
                                {
-                                       new UnaryVm { Is = true },
-                                       new UnaryVm { Is = false },
-                                       new UnaryVm { Is = true },
+                                       Country = GetCountries(), 
+                                       Grpoup = "Parent"
                                });
         }
-
 
         [HttpGet]
         public ActionResult FetchCountries()
@@ -39,11 +37,21 @@
             return IncJson(GetCountries().FirstOrDefault());
         }
 
-
         [HttpGet]
         public ActionResult FetchEmpty()
         {
             return IncJson(new List<CountryVm>());
+        }
+
+        [HttpGet]
+        public ActionResult FetchUnary()
+        {
+            return IncJson(new List<UnaryVm>
+                               {
+                                       new UnaryVm { Is = true }, 
+                                       new UnaryVm { Is = false }, 
+                                       new UnaryVm { Is = true }, 
+                               });
         }
 
         #endregion

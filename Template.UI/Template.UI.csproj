@@ -141,6 +141,7 @@
     </Compile>
     <Compile Include="Infrastructure\Bootstrapper.cs" />
     <Compile Include="Models\CityVm.cs" />
+    <Compile Include="Models\ComplexVm.cs" />
     <Compile Include="Models\CountryVm.cs" />
     <Compile Include="Models\UnaryVm.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -183,6 +184,7 @@
     <Content Include="Views\Template\For_Inner_Each_Tmpl.cshtml" />
     <Content Include="Views\Template\Less_Logic_Tmpl.cshtml" />
     <Content Include="Views\Template\For_Not_EachTmpl.cshtml" />
+    <Content Include="Views\Template\Complex_Tmpl.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

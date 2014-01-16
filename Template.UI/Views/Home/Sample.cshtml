@@ -76,3 +76,12 @@
           .AsHtmlAttributes()
           .ToDiv())
 </div>
+<div>
+    <h3>Complex</h3>
+    @(Html.When(JqueryBind.InitIncoding)
+          .Do()
+          .AjaxGet(Url.Action("FetchComplex", "Data"))
+          .OnSuccess(dsl => dsl.Self().Core().Insert.WithTemplateByUrl(Url.Dispatcher().AsView("~/Views/Template/Complex_Tmpl.cshtml")).Html())
+          .AsHtmlAttributes()
+          .ToDiv())
+</div>
