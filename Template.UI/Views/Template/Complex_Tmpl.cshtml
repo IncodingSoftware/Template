@@ -5,11 +5,18 @@
     using (var each = template.ForEach())
     {
         <div>                
-            <ul>
+            <ul style="@each.IsInline(r => r.IsRed, "color:red;")">
                 @using (var countryEach = each.ForEach(r => r.Country))
                 {
                     <li>
-                        Country @countryEach.For(r => r.Title) from parent @each.Up().For(r => r.Grpoup)
+                        @using (each.Up().Is(r => r.IsRed))
+                        {
+                            <span>Country @countryEach.For(r => r.Title) from red group @each.Up().For(r => r.Group)</span>
+                        }
+                        @using (each.Up().Not(r => r.IsRed))
+                        {
+                            <span>Country @countryEach.For(r => r.Title) by group @each.Up().For(r => r.Group)</span>
+                        }
                         <dl>
                             @using (var cityEach = countryEach.ForEach(r => r.Cities))
                             {

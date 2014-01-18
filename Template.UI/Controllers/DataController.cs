@@ -18,10 +18,10 @@
         [HttpGet]
         public ActionResult FetchComplex()
         {
-            return IncJson(new ComplexVm
+            return IncJson(new List<ComplexVm>
                                {
-                                       Country = GetCountries(), 
-                                       Grpoup = "Parent"
+                                       new ComplexVm { Country = GetCountries(), Group = "Public", IsRed = true }, 
+                                       new ComplexVm { Country = GetCountries(), Group = "Private", IsRed = false }, 
                                });
         }
 
