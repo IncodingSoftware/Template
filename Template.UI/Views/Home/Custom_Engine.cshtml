@@ -1,17 +1,41 @@
 @using Incoding.MvcContrib
-@using Template.UI.Models
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@section Head
+{
+    <script src="@Url.Content("~/Scripts/jQuery.tmpl.min.js")"> </script>
+    <script type="text/javascript">
 
-@{
-    var tmplId = Guid.NewGuid().ToString();
-    using (var template = Html.Incoding().ScriptTemplate<CountryVm>(tmplId))
-    {
-        using (var each = template.ForEach())
-        {
-            
+        function IncJqueryTmplTemplate() {
+
+            this.compile = function(tmpl) {
+                return tmpl;
+            };
+
+            this.render = function(tmpl, data) {
+                var container = $('<div>');
+                $.tmpl(tmpl, data).appendTo(container);
+                return container.html();
+            };
+
         }
-    }
+
+        ExecutableInsert.Template = new IncJqueryTmplTemplate();
+    </script>
 }
 
+@{ string tmplId = Guid.NewGuid().ToString(); }
+<script type="jquery-tmpl" id="@tmplId">
+    {{each data}}
+      <li>${Title}</li>
+    {{/each}}
+</script>
+
+
+@(Html.When(JqueryBind.InitIncoding)
+      .Do()
+      .AjaxGet(Url.Action("FetchCountries", "Data"))
+      .OnSuccess(dsl => dsl.Self().Core().Insert.WithTemplateById(tmplId).Html())
+      .AsHtmlAttributes()
+      .ToTag(HtmlTag.Ul))

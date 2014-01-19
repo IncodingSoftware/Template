@@ -13,9 +13,10 @@
         <script>
             TemplateFactory.Version = '@Guid.NewGuid().ToString()';
         </script>
+        @RenderSection("Head",false)
     </head>
     @Html.Incoding().RenderDropDownTemplate()
     <body>        
-        @RenderBody()
+        @RenderBody()        
     </body>
 </html>

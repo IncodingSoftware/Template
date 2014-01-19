@@ -14,14 +14,10 @@
     {
         <ul>
             @using (var each = template.ForEach())
-            {
-                <li>@each.For(r => r.Title) / @each.For(r => r.Code)</li>
-            }
+            { <li>@each.For(r => r.Title) / @each.For(r => r.Code)</li> }
         </ul>
     }
-
 }
-
 <div>
     <h3>By jquery selector</h3>
     @(Html.When(JqueryBind.InitIncoding)
